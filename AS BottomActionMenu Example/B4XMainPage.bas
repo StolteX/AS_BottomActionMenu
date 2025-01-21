@@ -35,17 +35,18 @@ Private Sub OpenDark
 	
 	BottomActionMenu.Initialize(Me,"BottomActionMenu",Root)
 	
-	BottomActionMenu.AddItem("WhatsApp",BottomActionMenu.FontToBitmap(Chr(0xF232),False,30,BottomActionMenu.TextColor),"")
-	BottomActionMenu.AddItem("Twitter",BottomActionMenu.FontToBitmap(Chr(0xF099),False,30,BottomActionMenu.TextColor),"")
-	BottomActionMenu.AddItem("Instagram",BottomActionMenu.FontToBitmap(Chr(0xF16D),False,30,BottomActionMenu.TextColor),"")
-	BottomActionMenu.AddItem("Snapchat",BottomActionMenu.FontToBitmap(Chr(0xF2AC),False,30,BottomActionMenu.TextColor),"")
-	BottomActionMenu.AddItem("YouTube",BottomActionMenu.FontToBitmap(Chr(0xF16A),False,30,BottomActionMenu.TextColor),"")
-	BottomActionMenu.AddItem("Stackoverflow",BottomActionMenu.FontToBitmap(Chr(0xF16C),False,30,BottomActionMenu.TextColor),"")
+	BottomActionMenu.Color = xui.Color_ARGB(255,32, 33, 37)
+	BottomActionMenu.DragIndicatorColor = xui.Color_White
+	BottomActionMenu.ItemProperties.TextColor = xui.Color_White
+	
+	BottomActionMenu.AddItem("WhatsApp",BottomActionMenu.FontToBitmap(Chr(0xF232),False,30,BottomActionMenu.ItemProperties.TextColor),"")
+	BottomActionMenu.AddItem("Twitter",BottomActionMenu.FontToBitmap(Chr(0xF099),False,30,BottomActionMenu.ItemProperties.TextColor),"")
+	BottomActionMenu.AddItem("Instagram",BottomActionMenu.FontToBitmap(Chr(0xF16D),False,30,BottomActionMenu.ItemProperties.TextColor),"")
+	BottomActionMenu.AddItem("Snapchat",BottomActionMenu.FontToBitmap(Chr(0xF2AC),False,30,BottomActionMenu.ItemProperties.TextColor),"")
+	BottomActionMenu.AddItem("YouTube",BottomActionMenu.FontToBitmap(Chr(0xF16A),False,30,BottomActionMenu.ItemProperties.TextColor),"")
+	BottomActionMenu.AddItem("Stackoverflow",BottomActionMenu.FontToBitmap(Chr(0xF16C),False,30,BottomActionMenu.ItemProperties.TextColor),"")
 	
 	BottomActionMenu.ShowPicker
-	
-	BottomActionMenu.Color = xui.Color_ARGB(255,32, 33, 37)
-	BottomActionMenu.TextColor = xui.Color_White
 	
 End Sub
 
@@ -54,14 +55,15 @@ Private Sub OpenLight
 	BottomActionMenu.Initialize(Me,"BottomActionMenu",Root)
 	
 	BottomActionMenu.Color = xui.Color_White
-	BottomActionMenu.TextColor = xui.Color_Black
+	BottomActionMenu.DragIndicatorColor = xui.Color_Black
+	BottomActionMenu.ItemProperties.TextColor = xui.Color_Black
 	
-	BottomActionMenu.AddItem("WhatsApp",BottomActionMenu.FontToBitmap(Chr(0xF232),False,30,BottomActionMenu.TextColor),"")
-	BottomActionMenu.AddItem("Twitter",BottomActionMenu.FontToBitmap(Chr(0xF099),False,30,BottomActionMenu.TextColor),"")
-	BottomActionMenu.AddItem("Instagram",BottomActionMenu.FontToBitmap(Chr(0xF16D),False,30,BottomActionMenu.TextColor),"")
-	BottomActionMenu.AddItem("Snapchat",BottomActionMenu.FontToBitmap(Chr(0xF2AC),False,30,BottomActionMenu.TextColor),"")
-	BottomActionMenu.AddItem("YouTube",BottomActionMenu.FontToBitmap(Chr(0xF16A),False,30,BottomActionMenu.TextColor),"")
-	BottomActionMenu.AddItem("Stackoverflow",BottomActionMenu.FontToBitmap(Chr(0xF16C),False,30,BottomActionMenu.TextColor),"")
+	BottomActionMenu.AddItem("WhatsApp",BottomActionMenu.FontToBitmap(Chr(0xF232),False,30,BottomActionMenu.ItemProperties.TextColor),"")
+	BottomActionMenu.AddItem("Twitter",BottomActionMenu.FontToBitmap(Chr(0xF099),False,30,BottomActionMenu.ItemProperties.TextColor),"")
+	BottomActionMenu.AddItem("Instagram",BottomActionMenu.FontToBitmap(Chr(0xF16D),False,30,BottomActionMenu.ItemProperties.TextColor),"")
+	BottomActionMenu.AddItem("Snapchat",BottomActionMenu.FontToBitmap(Chr(0xF2AC),False,30,BottomActionMenu.ItemProperties.TextColor),"")
+	BottomActionMenu.AddItem("YouTube",BottomActionMenu.FontToBitmap(Chr(0xF16A),False,30,BottomActionMenu.ItemProperties.TextColor),"")
+	BottomActionMenu.AddItem("Stackoverflow",BottomActionMenu.FontToBitmap(Chr(0xF16C),False,30,BottomActionMenu.ItemProperties.TextColor),"")
 	
 	BottomActionMenu.ShowPicker
 	

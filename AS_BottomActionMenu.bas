@@ -11,11 +11,18 @@ V1.00
 V1.01
 	-New HidePicker
 	-New get isOpen
+V1.02
+	-BreakingChange get and set TextColor renamed -> DragIndicatorColor
+	-New AS_BottomActionMenu_ItemProperties type
+	-New get ItemProperties
+	-BugFixes
 #End If
 
 #Event: ItemClick (Index As Int, Value As Object)
 
 Sub Class_Globals
+	
+	Type AS_BottomActionMenu_ItemProperties(xFont As B4XFont,TextColor As Int,Width As Float)
 	
 	Private mEventName As String 'ignore
 	Private mCallBack As Object 'ignore
@@ -35,7 +42,9 @@ Sub Class_Globals
 	Private m_BodyHeight As Float
 	Private m_HeaderColor As Int
 	Private m_BodyColor As Int
-	Private m_TextColor As Int
+	Private m_DragIndicatorColor As Int
+	
+	Private g_ItemProperties As AS_BottomActionMenu_ItemProperties
 	
 End Sub
 
@@ -57,7 +66,12 @@ Public Sub Initialize(Callback As Object,EventName As String,Parent As B4XView)
 	
 	m_HeaderColor = xui.Color_ARGB(255,32, 33, 37)
 	m_BodyColor = xui.Color_ARGB(255,32, 33, 37)
-	m_TextColor = xui.Color_White
+	m_DragIndicatorColor = xui.Color_White
+	
+	g_ItemProperties.Initialize
+	g_ItemProperties.TextColor = xui.Color_White
+	g_ItemProperties.Width = 90dip
+	g_ItemProperties.xFont = xui.CreateDefaultBoldFont(14)
 	
 	ini_xclv
 	
@@ -86,7 +100,13 @@ Private Sub ini_xclv
 	#If B4I
 	Dim sv As ScrollView = xclv_Main.sv
 	sv.Color = xui.Color_Transparent'xui.Color_ARGB(255,32, 33, 37)
+	#Else If B4J
+	xclv_Main.sv.As(ScrollPane).Style = "-fx-background:transparent;-fx-background-color:transparent;"
 	#End If
+	
+	xclv_Main.AsView.Color = xui.Color_Transparent
+	xclv_Main.sv.ScrollViewInnerPanel.Color = xui.Color_Transparent
+	xclv_Main.GetBase.Color = xui.Color_Transparent
 	
 End Sub
 
@@ -114,7 +134,7 @@ Public Sub ShowPicker
 	xpnl_Header.Color = m_HeaderColor
 	
 	xpnl_Header.AddView(xpnl_DragIndicator,xParent.Width/2 - 70dip/2,m_HeaderHeight/2 - 6dip/2,70dip,6dip)
-	Dim ARGB() As Int = GetARGB(m_TextColor)
+	Dim ARGB() As Int = GetARGB(m_DragIndicatorColor)
 	xpnl_DragIndicator.SetColorAndBorder(xui.Color_ARGB(80,ARGB(1),ARGB(2),ARGB(3)),0,0,3dip)
 	
 	BottomCard.BodyPanel.Color = m_BodyColor
@@ -144,14 +164,14 @@ Public Sub AddItem(Text As String,Icon As B4XBitmap,Value As Object)
 	
 	Dim xpnl_Background As B4XView = xui.CreatePanel("")
 	xpnl_Background.Color = m_BodyColor
-	xpnl_Background.SetLayoutAnimated(0,0,0,90dip,m_BodyHeight)
+	xpnl_Background.SetLayoutAnimated(0,0,0,g_ItemProperties.Width,m_BodyHeight)
 	
 	Dim xiv_Icon As B4XView = CreateImageView
-	xpnl_Background.AddView(xiv_Icon,0,m_BodyHeight/2 - 30dip,xpnl_Background.Width,30dip)
+	xpnl_Background.AddView(xiv_Icon,g_ItemProperties.Width/2 - 30dip/2,m_BodyHeight/2 - 30dip,xpnl_Background.Width,30dip)
 	xiv_Icon.SetBitmap(Icon)
 	
 	Dim xlbl_ItemText As B4XView = CreateLabel("")
-	xlbl_ItemText.TextColor = m_TextColor
+	xlbl_ItemText.TextColor = g_ItemProperties.TextColor
 	xlbl_ItemText.SetTextAlignment("CENTER","CENTER")
 	xlbl_ItemText.Text = Text
 	#If B4I
@@ -159,7 +179,7 @@ Public Sub AddItem(Text As String,Icon As B4XBitmap,Value As Object)
 	#Else If B4A
 	xlbl_ItemText.As(Label).SingleLine = False
 	#End If
-	xlbl_ItemText.Font = xui.CreateDefaultBoldFont(14)
+	xlbl_ItemText.Font = g_ItemProperties.xFont
 	xpnl_Background.AddView(xlbl_ItemText,0,m_BodyHeight/2,xpnl_Background.Width,38dip)
 	
 	xclv_Main.Add(xpnl_Background,Value)
@@ -168,18 +188,26 @@ End Sub
 
 #Region Properties
 
+'Defaults:
+'TextColor - White
+'Width - 90dip
+'xFont - Bold 14
+Public Sub getItemProperties As AS_BottomActionMenu_ItemProperties
+	Return g_ItemProperties
+End Sub
+
 Public Sub getisOpen As Boolean
 	Return BottomCard.IsOpen
 End Sub
 
-Public Sub setTextColor(Color As Int)
-	m_TextColor = Color
-	Dim ARGB() As Int = GetARGB(m_TextColor)
+Public Sub setDragIndicatorColor(Color As Int)
+	m_DragIndicatorColor = Color
+	Dim ARGB() As Int = GetARGB(m_DragIndicatorColor)
 	xpnl_DragIndicator.SetColorAndBorder(xui.Color_ARGB(80,ARGB(1),ARGB(2),ARGB(3)),0,0,3dip)
 End Sub
 
-Public Sub getTextColor As Int
-	Return m_TextColor
+Public Sub getDragIndicatorColor As Int
+	Return m_DragIndicatorColor
 End Sub
 
 Public Sub setColor(Color As Int)
