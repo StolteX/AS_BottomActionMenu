@@ -16,6 +16,8 @@ V1.02
 	-New AS_BottomActionMenu_ItemProperties type
 	-New get ItemProperties
 	-BugFixes
+V1.03
+	-BugFix - Icon under B4A in wrong position
 #End If
 
 #Event: ItemClick (Index As Int, Value As Object)
@@ -167,7 +169,7 @@ Public Sub AddItem(Text As String,Icon As B4XBitmap,Value As Object)
 	xpnl_Background.SetLayoutAnimated(0,0,0,g_ItemProperties.Width,m_BodyHeight)
 	
 	Dim xiv_Icon As B4XView = CreateImageView
-	xpnl_Background.AddView(xiv_Icon,g_ItemProperties.Width/2 - 30dip/2,m_BodyHeight/2 - 30dip,xpnl_Background.Width,30dip)
+	xpnl_Background.AddView(xiv_Icon,g_ItemProperties.Width/2 - 30dip/2,m_BodyHeight/2 - 30dip,30dip,30dip)
 	xiv_Icon.SetBitmap(Icon)
 	
 	Dim xlbl_ItemText As B4XView = CreateLabel("")
